@@ -1,6 +1,6 @@
 # Farmers Market Database Application
 
-## Project Overview
+## Overview
 
 This project is a database-driven Farmers Market application developed as a group project.
 
@@ -16,9 +16,7 @@ The application will connect directly to our relational database and demonstrate
 
 ## Project Management
 
-Our team is using Trello to organize project tasks and track project progress.
-
-**Public Project Board
+* Github Projects 
 
 ## Required Application Features
 
@@ -31,7 +29,7 @@ The completed application will allow users to:
 * Place a product pre-order
 * Process the pre-order using a database transaction
 
-## Technology Stack
+## Technology
 
 The application will use:
 
@@ -41,11 +39,9 @@ The application will use:
 * CSS
 * MySQL
 * GitHub
-* Trello
+
 
 ## Application Pages
-
-The application will include:
 
 1. Home Page
 2. Farmers Markets Page
