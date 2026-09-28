@@ -17,6 +17,9 @@ The application will connect directly to our relational database and demonstrate
 ## Project Management
 
 * Github Projects 
+* 
+
+<img width="1882" height="873" alt="Image" src="https://github.com/user-attachments/assets/80680121-540f-40c6-b5b8-741c1f30cbd5" />
 
 ## Required Application Features
 
