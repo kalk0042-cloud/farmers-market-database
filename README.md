@@ -109,10 +109,15 @@ The final application will demonstrate how a normalized relational database can 
 
 ## Project Management
 
-* Github Projects 
+* Github Projects
 * 
-
 <img width="1882" height="873" alt="Image" src="https://github.com/user-attachments/assets/80680121-540f-40c6-b5b8-741c1f30cbd5" />
+
+## Entity-Relationship Diagram
+
+The following ERD represents the relational database design for the Farmers Market Database Application.
+
+<img width="1667" height="1521" alt="FARMERS MARKET DATABASE ERD" src="https://github.com/user-attachments/assets/fb90125b-a8aa-498d-88a6-635121f55415" />
 
 
 Users will be able to browse markets, view participating vendors, search for products across markets, and submit pre-orders through a graphical interface while 
