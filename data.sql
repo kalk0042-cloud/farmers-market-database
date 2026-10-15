@@ -1,7 +1,4 @@
-
-
 USE farmers_market_db;
-
 
 DELETE FROM PreOrderItem;
 DELETE FROM PreOrder;
@@ -11,7 +8,6 @@ DELETE FROM Customer;
 DELETE FROM Product;
 DELETE FROM Vendor;
 DELETE FROM Market;
-
 
 
 INSERT INTO Market
@@ -108,7 +104,6 @@ VALUES
 (50, 'Fresh Mint', 'Herbs', 'Fresh mint bunches.');
 
 
-
 INSERT INTO MarketVendor
 (market_vendor_id, market_id, vendor_id, stall_number, active)
 VALUES
@@ -200,7 +195,6 @@ VALUES
 (49, 20, 37, 5.50, 30, TRUE),
 (50, 20, 38, 8.00, 15, TRUE),
 
-
 (51, 21, 1, 4.25, 20, TRUE),
 (52, 21, 2, 6.50, 25, TRUE),
 (53, 22, 32, 7.50, 10, TRUE),
@@ -212,17 +206,14 @@ VALUES
 (59, 20, 7, 4.00, 22, TRUE),
 (60, 20, 12, 4.50, 18, TRUE);
 
-
 INSERT INTO Customer
 (customer_id, first_name, last_name, email, phone)
 VALUES
-(1, 'Emma', 'Johnson', 'emma.johnson@example.com', '763-555-0201'),
-(2, 'Noah', 'Williams', 'noah.williams@example.com', '763-555-0202'),
-(3, 'Olivia', 'Brown', 'olivia.brown@example.com', '763-555-0203'),
-(4, 'Liam', 'Miller', 'liam.miller@example.com', '763-555-0204'),
-(5, 'Sophia', 'Davis', 'sophia.davis@example.com', '763-555-0205');
-
-
+(1, 'Emma', 'Johnson', 'emma.johnson@sample.com', '763-555-0201'),
+(2, 'Noah', 'Williams', 'noah.williams@sample.com', '763-555-0202'),
+(3, 'Olivia', 'Brown', 'olivia.brown@sample.com', '763-555-0203'),
+(4, 'Liam', 'Miller', 'liam.miller@sample.com', '763-555-0204'),
+(5, 'Sophia', 'Davis', 'sophia.davis@sample.com', '763-555-0205');
 
 INSERT INTO PreOrder
 (preorder_id, customer_id, market_vendor_id, order_date, pickup_date, status, total_amount)
@@ -240,12 +231,9 @@ VALUES
 (4, 2, 13, 2, 6.00, 12.00),
 (5, 3, 18, 2, 5.00, 10.00);
 
-
-
 SELECT COUNT(*) AS market_count FROM Market;
 SELECT COUNT(*) AS farmer_count FROM Vendor;
 SELECT COUNT(*) AS product_count FROM Product;
 SELECT COUNT(*) AS offering_count FROM ProductOffering;
 
 
--- offering_count = 60
