@@ -18,7 +18,6 @@ DROP TABLE IF EXISTS Market;
 
 -- ============================================================
 -- MARKET
--- Stores information about each farmers market
 -- ============================================================
 
 CREATE TABLE Market (
@@ -39,7 +38,6 @@ CREATE TABLE Market (
 
 -- ============================================================
 -- VENDOR
--- Stores information about vendors participating in markets
 -- ============================================================
 
 CREATE TABLE Vendor (
@@ -55,7 +53,6 @@ CREATE TABLE Vendor (
 
 -- ============================================================
 -- PRODUCT
--- Stores the master list of available product types
 -- ============================================================
 
 CREATE TABLE Product (
@@ -69,7 +66,6 @@ CREATE TABLE Product (
 
 -- ============================================================
 -- CUSTOMER
--- Stores customer information for pre-orders
 -- ============================================================
 
 CREATE TABLE Customer (
