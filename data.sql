@@ -11,7 +11,8 @@ DELETE FROM Market;
 
 
 INSERT INTO Market
-(market_id, market_name, description, address, city, state, zip_code, market_day, start_time, end_time, active)
+(market_id, market_name, description, address, city, state, 
+ zip_code, market_day, start_time, end_time, active)
 VALUES
 (1, 'Ramsey Farmers Market', 'Local produce, baked goods, flowers, and artisan foods.', '7550 Sunwood Dr NW', 'Ramsey', 'MN', '55303', 'Saturday', '08:00:00', '13:00:00', TRUE),
 (2, 'Anoka Community Market', 'Seasonal farmers market featuring local growers and makers.', '2015 1st Ave', 'Anoka', 'MN', '55303', 'Thursday', '15:00:00', '19:00:00', TRUE),
@@ -209,21 +210,23 @@ VALUES
 INSERT INTO Customer
 (customer_id, first_name, last_name, email, phone)
 VALUES
-(1, 'Emma', 'Johnson', 'emma.johnson@sample.com', '763-555-0201'),
-(2, 'Noah', 'Williams', 'noah.williams@sample.com', '763-555-0202'),
-(3, 'Olivia', 'Brown', 'olivia.brown@sample.com', '763-555-0203'),
-(4, 'Liam', 'Miller', 'liam.miller@sample.com', '763-555-0204'),
-(5, 'Sophia', 'Davis', 'sophia.davis@sample.com', '763-555-0205');
+(1, 'Emma', 'Johnson', 'emma.johnson@gmail.com', '763-555-0201'),
+(2, 'Noah', 'Williams', 'noah.williams@yahoo.com', '763-555-0202'),
+(3, 'Olivia', 'Brown', 'olivia.brown@outlook.com', '763-555-0203'),
+(4, 'Liam', 'Miller', 'liam.miller@hotmail.com', '763-555-0204'),
+(5, 'Sophia', 'Davis', 'sophia.davis@icloud.com', '763-555-0205');
 
 INSERT INTO PreOrder
-(preorder_id, customer_id, market_vendor_id, order_date, pickup_date, status, total_amount)
+(preorder_id, customer_id, market_vendor_id, order_date, 
+ pickup_date, status, total_amount)
 VALUES
 (1, 1, 1, '2026-10-10 09:15:00', '2026-10-17', 'Confirmed', 14.00),
 (2, 2, 5, '2026-10-10 12:30:00', '2026-10-15', 'Pending', 19.00),
 (3, 3, 7, '2026-10-11 14:10:00', '2026-10-17', 'Ready', 10.00);
 
 INSERT INTO PreOrderItem
-(preorder_item_id, preorder_id, offering_id, quantity, unit_price, line_total)
+(preorder_item_id, preorder_id, offering_id, 
+ quantity, unit_price, line_total)
 VALUES
 (1, 1, 1, 2, 4.00, 8.00),
 (2, 1, 2, 1, 6.00, 6.00),
@@ -231,9 +234,16 @@ VALUES
 (4, 2, 13, 2, 6.00, 12.00),
 (5, 3, 18, 2, 5.00, 10.00);
 
-SELECT COUNT(*) AS market_count FROM Market;
-SELECT COUNT(*) AS farmer_count FROM Vendor;
-SELECT COUNT(*) AS product_count FROM Product;
-SELECT COUNT(*) AS offering_count FROM ProductOffering;
+SELECT COUNT(*) AS market_count 
+FROM Market;
+
+SELECT COUNT(*) AS farmer_count 
+FROM Vendor;
+
+SELECT COUNT(*) AS product_count F
+FROM Product;
+
+SELECT COUNT(*) AS offering_count 
+FROM ProductOffering;
 
 
