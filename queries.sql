@@ -2,7 +2,7 @@ USE farmers_market_db;
 
 
 
-SELECT
+SELECT -- returns all active markets --
     market_id,
     market_name,
     description,
@@ -22,7 +22,7 @@ ORDER BY market_name;
 
 SET @market_id = 1;
 
-SELECT
+SELECT -- returns selected market --
     market_id,
     market_name,
     description,
@@ -42,7 +42,7 @@ WHERE market_id = @market_id
 
 SET @market_id = 1;
 
-SELECT
+SELECT -- returns vendors at selected market --
     v.vendor_id,
     v.vendor_name,
     v.description,
@@ -62,7 +62,7 @@ ORDER BY v.vendor_name;
 
 SET @search_term = 'tomato';
 
-SELECT
+SELECT -- searched or an item, returns the vendor, market, price, and qty, of item --
     p.product_id,
     p.product_name,
     p.category,
@@ -95,7 +95,7 @@ ORDER BY p.product_name, po.price;
 
 SET @market_id = 1;
 
-SELECT
+SELECT -- returns all products offered at a selected market --
     p.product_name,
     p.category,
     v.vendor_name,
@@ -121,7 +121,7 @@ ORDER BY v.vendor_name, p.product_name;
 
 SET @offering_id = 1;
 
-SELECT
+SELECT -- returns information about a specific product offering --
     po.offering_id,
     p.product_name,
     p.description AS product_description,
@@ -151,7 +151,7 @@ WHERE po.offering_id = @offering_id
 SET @offering_id = 1;
 SET @requested_quantity = 2;
 
-SELECT
+SELECT -- looks up a product offering and tests the qty agaist the user qty, returns the qty available and if the requested qty is availble --
     po.offering_id,
     po.quantity_available,
     @requested_quantity AS requested_quantity,
@@ -167,7 +167,7 @@ WHERE po.offering_id = @offering_id
 
 SET @preorder_id = 1;
 
-SELECT
+SELECT -- returns customer and order information about a pre order --
     o.preorder_id,
     o.order_date,
     o.pickup_date,
@@ -193,7 +193,7 @@ WHERE o.preorder_id = @preorder_id;
 
 SET @preorder_id = 1;
 
-SELECT
+SELECT -- returns the items from a pre-order --
     oi.preorder_item_id,
     p.product_name,
     oi.quantity,
@@ -212,7 +212,7 @@ ORDER BY p.product_name;
 
 SET @customer_id = 1;
 
-SELECT
+SELECT -- returns in order information about a customer --
     o.preorder_id,
     o.order_date,
     o.pickup_date,
@@ -234,7 +234,7 @@ ORDER BY o.order_date DESC;
 
 SET @category = 'Vegetables';
 
-SELECT
+SELECT -- returns information about products, market, vendors, price and qty, by product category --
     p.product_name,
     p.category,
     v.vendor_name,
@@ -257,8 +257,8 @@ ORDER BY p.product_name, po.price;
 
 
 
-
-SELECT
+SET @QTY = 15;
+SELECT -- returns product, vendory, market, and qty information that have 15 or less availble qty --
     p.product_name,
     v.vendor_name,
     m.market_name,
@@ -273,13 +273,13 @@ JOIN Vendor AS v
 JOIN Market AS m
     ON mv.market_id = m.market_id
 WHERE po.active = TRUE
-  AND po.quantity_available <= 15
+  AND po.quantity_available <= @QTY
 ORDER BY po.quantity_available ASC, p.product_name;
 
 
 
 
-SELECT
+SELECT -- returns the number of active vendors at each market --
     m.market_id,
     m.market_name,
     COUNT(mv.market_vendor_id) AS vendor_count
@@ -296,7 +296,7 @@ ORDER BY m.market_name;
 
 SET @search_term = 'tomato';
 
-SELECT
+SELECT -- returns qty, price, market, and vendor of a search of product name, includes wildcards for product names that containt the search term --
     p.product_name,
     v.vendor_name,
     m.market_name,
