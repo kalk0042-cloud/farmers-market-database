@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-heading">
+    <h1>Browse Farmers Markets</h1>
+    <p>Discover local markets throughout Minnesota.</p>
+</section>
+
+<div class="market-grid">
+
+    {% for market in markets %}
+
+    <div class="market-card">
+        <div class="market-icon">🌻</div>
+
+        <h2>{{ market.market_name }}</h2>
+        
+        <a
+            href="{{ url_for('market_details', market_id=market.market_id) }}"
+            class="button"
+        >
+            View Market Details
+        </a>
+        
+        <p>{{ market.description }}</p>
+
+        <div class="market-info">
+            <p>
+                📍 {{ market.city }},
+                {{ market.state }}
+            </p>
+
+            <p>
+                🗓️ {{ market.market_day }}
+            </p>
+
+            <p>
+                🏠 {{ market.address }}
+            </p>
+        </div>
+    </div>
+
+    {% else %}
+
+    <p>No farmers markets were found.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

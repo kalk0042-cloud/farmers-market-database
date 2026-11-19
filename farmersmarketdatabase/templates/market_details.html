@@ -1,0 +1,104 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-heading">
+    <a href="{{ url_for('markets') }}">
+        ← Back to Markets
+    </a>
+
+    <h1>{{ market.market_name }}</h1>
+    <p>{{ market.description }}</p>
+</section>
+
+<section class="detail-section">
+    <h2>Market Information</h2>
+
+    <p>
+        📍 {{ market.address }},
+        {{ market.city }},
+        {{ market.state }} {{ market.zip_code }}
+    </p>
+
+    <p>🗓️ Market Day: {{ market.market_day }}</p>
+
+    <p>
+        🕒 Hours:
+        {{ market.start_time }} - {{ market.end_time }}
+    </p>
+</section>
+
+<section class="detail-section">
+    <h2>Participating Vendors</h2>
+
+    <div class="market-grid">
+        {% for vendor in vendors %}
+
+        <div class="market-card">
+            <div class="market-icon">👩‍🌾</div>
+
+            <h3>{{ vendor.vendor_name }}</h3>
+
+            <p>{{ vendor.description }}</p>
+
+            <p>
+                <strong>Stall:</strong>
+                {{ vendor.stall_number }}
+            </p>
+
+            {% if vendor.phone %}
+                <p>Phone: {{ vendor.phone }}</p>
+            {% endif %}
+
+            {% if vendor.email %}
+                <p>Email: {{ vendor.email }}</p>
+            {% endif %}
+        </div>
+
+        {% else %}
+            <p>No vendors are currently listed.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="detail-section">
+    <h2>Available Products</h2>
+
+    <div class="market-grid">
+        {% for product in products %}
+
+        <div class="market-card">
+            <div class="market-icon">🥕</div>
+
+            <h3>{{ product.product_name }}</h3>
+
+            <p>{{ product.description }}</p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ product.category }}
+            </p>
+
+            <p>
+                <strong>Vendor:</strong>
+                {{ product.vendor_name }}
+            </p>
+
+            <p class="product-price">
+                ${{ "%.2f"|format(product.price) }}
+            </p>
+
+            <p>
+                Available:
+                {{ product.quantity_available }}
+            </p>
+        </div>
+
+        {% else %}
+            <p>No products are currently listed.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-heading">
+    <h1>Search Local Products</h1>
+    <p>
+        Discover fresh products from vendors
+        at farmers markets throughout Minnesota.
+    </p>
+</section>
+
+<form method="GET"
+      action="{{ url_for('products') }}"
+      class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search products, vendors, or markets..."
+        value="{{ search_term }}"
+    >
+
+    <select name="category">
+        <option value="">All Categories</option>
+
+        {% for category in categories %}
+            <option
+                value="{{ category }}"
+                {% if selected_category == category %}
+                    selected
+                {% endif %}
+            >
+                {{ category }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="button">
+        Search Products
+    </button>
+
+    <a href="{{ url_for('products') }}"
+       class="clear-button">
+        Clear
+    </a>
+
+</form>
+
+<p class="result-count">
+    {{ products|length }} product offerings found
+</p>
+
+<div class="market-grid">
+
+    {% for product in products %}
+
+    <div class="market-card product-card">
+
+        <div class="market-icon">🥕</div>
+
+        <p class="product-category">
+            {{ product.category }}
+        </p>
+
+        <h2>{{ product.product_name }}</h2>
+
+        <p>{{ product.description }}</p>
+
+        <p>
+            <strong>Vendor:</strong>
+            {{ product.vendor_name }}
+        </p>
+
+        <p>
+            <strong>Market:</strong>
+            <a href="{{ url_for(
+                'market_details',
+                market_id=product.market_id
+            ) }}">
+                {{ product.market_name }}
+            </a>
+        </p>
+
+        <p>📍 {{ product.city }}, MN</p>
+
+        <p class="product-price">
+            ${{ "%.2f"|format(product.price) }}
+        </p>
+
+        <p>
+            <strong>Available:</strong>
+            {{ product.quantity_available }}
+        </p>
+        
+        <a
+            href="{{ url_for('checkout', offering_id=product.offering_id) }}"
+            class="button"
+        >
+            Pre-Order This Product
+        </a>
+        
+    </div>
+
+    {% else %}
+
+    <div class="empty-results">
+        <h3>No products found</h3>
+        <p>
+            Try searching for another product
+            or selecting a different category.
+        </p>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

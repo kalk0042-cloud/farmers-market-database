@@ -1,0 +1,168 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-heading">
+    <a href="{{ url_for('products') }}">
+        ← Back to Products
+    </a>
+
+    <h1>Place a Pre-Order</h1>
+    <p>Reserve fresh local products for market pickup.</p>
+</section>
+
+<section class="detail-section">
+
+    <h2>Order Summary</h2>
+
+    <div class="market-card">
+
+        <h3>{{ offering.product_name }}</h3>
+
+        <p>{{ offering.description }}</p>
+
+        <p>
+            <strong>Vendor:</strong>
+            {{ offering.vendor_name }}
+        </p>
+
+        <p>
+            <strong>Market:</strong>
+            {{ offering.market_name }}
+        </p>
+
+        <p class="product-price">
+            ${{ "%.2f"|format(offering.price) }}
+        </p>
+
+        <p>
+            <strong>Available Quantity:</strong>
+            {{ offering.quantity_available }}
+        </p>
+
+    </div>
+
+</section>
+
+<section class="detail-section">
+
+    <h2>Customer & Pickup Information</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p role="alert" style="color: #b42318;">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form
+        method="POST"
+        action="{{ url_for(
+            'checkout',
+            offering_id=offering.offering_id
+        ) }}"
+        class="checkout-form"
+    >
+
+        <label for="customer_id">
+            Select Customer
+        </label>
+
+        <select
+            id="customer_id"
+            name="customer_id"
+            required
+        >
+            <option value="">Choose a customer</option>
+
+            {% for customer in customers %}
+                <option value="{{ customer.customer_id }}">
+                    {{ customer.first_name }}
+                    {{ customer.last_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="quantity">
+            Quantity
+        </label>
+
+        <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            max="{{ offering.quantity_available }}"
+            value="1"
+            required
+        >
+
+        <label for="pickup_date">
+            Pickup Date
+        </label>
+
+        <input
+            type="date"
+            id="pickup_date"
+            name="pickup_date"
+            min="{{ today }}"
+            required
+        >
+
+        <p>
+            <strong>Unit Price:</strong>
+            ${{ "%.2f"|format(offering.price) }}
+        </p>
+
+        <p>
+            <strong>Estimated Total:</strong>
+            <span id="estimated-total">
+                ${{ "%.2f"|format(offering.price) }}
+            </span>
+        </p>
+
+        <button
+            type="submit"
+            class="button"
+            {% if offering.quantity_available < 1 %}
+                disabled
+            {% endif %}
+        >
+            Place Pre-Order
+        </button>
+
+    </form>
+
+</section>
+
+<input
+    type="hidden"
+    id="unit-price"
+    value="{{ offering.price }}"
+>
+
+<script>
+    const quantityInput = document.getElementById("quantity");
+    const totalDisplay = document.getElementById("estimated-total");
+
+    const unitPrice = Number(
+        document.getElementById("unit-price").value
+    );
+
+    function updateTotal() {
+        const quantity = Number(quantityInput.value) || 0;
+        const total = unitPrice * quantity;
+
+        totalDisplay.textContent = "$" + total.toFixed(2);
+    }
+
+    quantityInput.addEventListener("input", updateTotal);
+    updateTotal();
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,122 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="detail-section">
+
+    <div style="text-align: center;">
+
+        <div style="font-size: 55px;">✅</div>
+
+        <h1>Pre-Order Confirmed!</h1>
+
+        <p>
+            Your pre-order has been successfully
+            saved to our database.
+        </p>
+
+        <h2>Order #{{ order.preorder_id }}</h2>
+
+        <p>
+            <strong>Status:</strong>
+            {{ order.status }}
+        </p>
+
+    </div>
+
+</section>
+
+<section class="detail-section">
+
+    <h2>Customer Information</h2>
+
+    <p>
+        <strong>Name:</strong>
+        {{ order.first_name }}
+        {{ order.last_name }}
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        {{ order.email }}
+    </p>
+
+</section>
+
+<section class="detail-section">
+
+    <h2>Pickup Information</h2>
+
+    <p>
+        <strong>Farmers Market:</strong>
+        {{ order.market_name }}
+    </p>
+
+    <p>
+        <strong>Vendor:</strong>
+        {{ order.vendor_name }}
+    </p>
+
+    <p>
+        <strong>Pickup Date:</strong>
+        {{ order.pickup_date }}
+    </p>
+
+</section>
+
+<section class="detail-section">
+
+    <h2>Order Details</h2>
+
+    <div class="market-grid">
+
+        {% for item in items %}
+
+        <div class="market-card">
+
+            <h3>{{ item.product_name }}</h3>
+
+            <p>
+                <strong>Quantity:</strong>
+                {{ item.quantity }}
+            </p>
+
+            <p>
+                <strong>Unit Price:</strong>
+                ${{ "%.2f"|format(item.unit_price) }}
+            </p>
+
+            <p>
+                <strong>Line Total:</strong>
+                ${{ "%.2f"|format(item.line_total) }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <h2>
+        Order Total:
+        ${{ "%.2f"|format(order.total_amount) }}
+    </h2>
+
+</section>
+
+<section style="text-align: center; margin: 35px 0;">
+
+    <a href="{{ url_for('products') }}"
+       class="button">
+        Continue Shopping
+    </a>
+
+    <a href="{{ url_for('markets') }}"
+       class="button">
+        Browse Markets
+    </a>
+
+</section>
+
+{% endblock %}
